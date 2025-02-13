@@ -4,26 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="./br-shelltracker.css">
-
     <title>br-shelltracker</title>
+
+    <style>.hidden { display: none; }</style>
 </head>
 <body>
-    <div class="app">
+    <noscript>PLEASE ENABLE JAVASCRIPT IN YOUR WEBBROWSER OR THIS TOOL WON'T WORK.</noscript>
+
+    <div class="app hidden">
+        <h1>br-shelltracker</h1>
 
         <div class="shelltracker">
-            <h1>br-shelltracker</h1>
-
-            <noscript>
-                <div class="noscript">
-                    Please enable JavaScript in your webbrowser or this tool won't work.
-                </div>
-            </noscript>
 
             <div class="shell live">
-                <div class="label">live</div>
+                <div class="label">live shells</div>
                 <div class="calc">
-                    <div class="count">🥺</div>
+                    <div class="count">?</div>
                     <div class="add btn">+</div>
                     <div class="rem btn">−</div>
                     <div class="reset btn">↺</div>
@@ -31,9 +27,9 @@
             </div>
 
             <div class="shell blank">
-                <div class="label">blank</div>
+                <div class="label">blank shells</div>
                 <div class="calc">
-                    <div class="count">🥺</div>
+                    <div class="count">?</div>
                     <div class="add btn">+</div>
                     <div class="rem btn">−</div>
                     <div class="reset btn">↺</div>
@@ -45,11 +41,11 @@
                 <div class="value">
                     <div>
                         <small class="label">live</small><br>
-                        <span class="islive_chance">🥺</span>%
+                        <span class="islive_chance">?</span>%
                     </div>
                     <div>
                         <small class="label">blank</small><br>
-                        <span class="isblank_chance">🥺</span>%
+                        <span class="isblank_chance">?</span>%
                     </div>
                 </div>
             </div>
@@ -68,11 +64,8 @@
                 A helper tool for the game <a href="https://criticalreflex.io/buckshot_roulette" target="_blank">Buckshot Roulette</a>.
             </p>
             <p>
-                Too baked to remember how many <strong class="live">live</strong> and <strong class="blank">blank</strong> <a href="https://buckshot-roulette.fandom.com/wiki/Shotgun#Shells" target="_blank">shells</a> there are left?
-                Just update the counts here whenever the shotgun is reloaded, a shell is used, ejected, or its polarity is flipped.
-            </p>
-            <p>
-                Work in progress.
+                Too baked to remember how many live and blank shells there are left?
+                Just click <strong>+</strong> or <strong>−</strong> to update the displayed counts and chances whenever the shotgun is reloaded, a shell is used, ejected, or its polarity is flipped.
             </p>
             <p>
                 <a href="https://github.com/etrusci-org/br-shelltracker" target="_blank">GitHub</a> &middot;

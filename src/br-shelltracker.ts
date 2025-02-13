@@ -1,4 +1,4 @@
-type BRHelperState = {
+type BRShellTrackerState = {
     live_count: number
     blank_count: number
     total_count: number
@@ -7,8 +7,8 @@ type BRHelperState = {
 }
 
 
-type BRHelperUI = {
-    // app: HTMLElement
+type BRShellTrackerUI = {
+    app: HTMLElement
     live_count: HTMLElement
     blank_count: HTMLElement
     islive_chance: HTMLElement
@@ -25,10 +25,11 @@ type BRHelperUI = {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-class BRHelper
+class BRShellTracker
 {
-    #state: BRHelperState
-    #ui: BRHelperUI
+    static v: number = 7
+    #state: BRShellTrackerState
+    #ui: BRShellTrackerUI
 
 
     constructor()
@@ -42,7 +43,7 @@ class BRHelper
         }
 
         this.#ui = {
-            // app: document.querySelector('.app') as HTMLElement,
+            app: document.querySelector('.app') as HTMLElement,
             live_count: document.querySelector('.shell.live .count') as HTMLElement,
             blank_count: document.querySelector('.shell.blank .count') as HTMLElement,
             islive_chance: document.querySelector('.islive_chance') as HTMLElement,
@@ -61,6 +62,8 @@ class BRHelper
         this.#ui.add_blank.addEventListener('click', () => this.#recount('blank', 'add'))
         this.#ui.rem_blank.addEventListener('click', () => this.#recount('blank', 'rem'))
         this.#ui.reset_blank.addEventListener('click', () => this.#recount('blank', 'reset'))
+
+        this.#ui.app.classList.remove('hidden')
 
         this.#update_ui()
     }
@@ -113,5 +116,10 @@ class BRHelper
 
 
 window.addEventListener('load', () => {
-    new BRHelper()
+    const s = document.createElement('link')
+    s.setAttribute('rel', 'stylesheet')
+    s.setAttribute('href', `./br-shelltracker.css?v=${BRShellTracker.v}`)
+    document.head.append(s)
+
+    new BRShellTracker()
 })

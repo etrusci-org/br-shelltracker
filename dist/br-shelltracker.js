@@ -1,5 +1,6 @@
 "use strict";
-class BRHelper {
+class BRShellTracker {
+    static v = 7;
     #state;
     #ui;
     constructor() {
@@ -11,6 +12,7 @@ class BRHelper {
             isblank_chance: 0,
         };
         this.#ui = {
+            app: document.querySelector('.app'),
             live_count: document.querySelector('.shell.live .count'),
             blank_count: document.querySelector('.shell.blank .count'),
             islive_chance: document.querySelector('.islive_chance'),
@@ -28,6 +30,7 @@ class BRHelper {
         this.#ui.add_blank.addEventListener('click', () => this.#recount('blank', 'add'));
         this.#ui.rem_blank.addEventListener('click', () => this.#recount('blank', 'rem'));
         this.#ui.reset_blank.addEventListener('click', () => this.#recount('blank', 'reset'));
+        this.#ui.app.classList.remove('hidden');
         this.#update_ui();
     }
     #update_ui() {
@@ -64,5 +67,9 @@ class BRHelper {
     }
 }
 window.addEventListener('load', () => {
-    new BRHelper();
+    const s = document.createElement('link');
+    s.setAttribute('rel', 'stylesheet');
+    s.setAttribute('href', `./br-shelltracker.css?v=${BRShellTracker.v}`);
+    document.head.append(s);
+    new BRShellTracker();
 });
