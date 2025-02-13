@@ -26,7 +26,7 @@ Just click `+` or `−` to update the displayed counts and chances whenever the 
 
 To use it, open [dist/index.html](./dist/index.html) in a webbrowser.
 
-I host the latest release on <https://etrusci.org/tool/br-shelltracker>. **(not yet!)**
+I host the latest release on <https://etrusci.org/tool/br-shelltracker>.
 
 **But you can also self-host it if you like.**
 It works from the local filesystem and has not to be put on a webserver.  
