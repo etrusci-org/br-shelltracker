@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./br-shelltracker.css">
+
+    <title>br-shelltracker</title>
+</head>
+<body>
+    <div class="app">
+
+        <div class="shelltracker">
+            <h1>br-shelltracker</h1>
+
+            <noscript>
+                <div class="noscript">
+                    Please enable JavaScript in your webbrowser or this tool won't work.
+                </div>
+            </noscript>
+
+            <div class="shell live">
+                <div class="label">live</div>
+                <div class="calc">
+                    <div class="count">🥺</div>
+                    <div class="add btn">+</div>
+                    <div class="rem btn">−</div>
+                    <div class="reset btn">↺</div>
+                </div>
+            </div>
+
+            <div class="shell blank">
+                <div class="label">blank</div>
+                <div class="calc">
+                    <div class="count">🥺</div>
+                    <div class="add btn">+</div>
+                    <div class="rem btn">−</div>
+                    <div class="reset btn">↺</div>
+                </div>
+            </div>
+
+            <div class="chance">
+                <div class="label">current shell</div>
+                <div class="value">
+                    <div>
+                        <small class="label">live</small><br>
+                        <span class="islive_chance">🥺</span>%
+                    </div>
+                    <div>
+                        <small class="label">blank</small><br>
+                        <span class="isblank_chance">🥺</span>%
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="godown">
+            ?&darr;?&darr;?&darr;?
+        </div>
+
+
+        <div class="footer">
+            <p>
+                <strong>br-shelltracker</strong><br>
+                A helper tool for the game <a href="https://criticalreflex.io/buckshot_roulette" target="_blank">Buckshot Roulette</a>.
+            </p>
+            <p>
+                Too baked to remember how many <strong class="live">live</strong> and <strong class="blank">blank</strong> <a href="https://buckshot-roulette.fandom.com/wiki/Shotgun#Shells" target="_blank">shells</a> there are left?
+                Just update the counts here whenever the shotgun is reloaded, a shell is used, ejected, or its polarity is flipped.
+            </p>
+            <p>
+                Work in progress.
+            </p>
+            <p>
+                <a href="https://github.com/etrusci-org/br-shelltracker" target="_blank">GitHub</a> &middot;
+                <a href="https://etrusci.org" target="_blank">etrusci.org</a>
+            </p>
+        </div>
+
+    </div>
+
+
+    <script src="./br-shelltracker.js"></script>
+</body>
+</html>
