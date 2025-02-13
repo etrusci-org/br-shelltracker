@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>br-shelltracker</title>
+
+    <style>.hidden { display: none; }</style>
+</head>
+<body>
+    <noscript>PLEASE ENABLE JAVASCRIPT IN YOUR WEBBROWSER OR THIS TOOL WON'T WORK.</noscript>
+
+    <div class="app hidden">
+        <h1>br-shelltracker</h1>
+
+        <div class="shelltracker">
+
+            <div class="shell live">
+                <div class="label">live shells</div>
+                <div class="calc">
+                    <div class="count">?</div>
+                    <div class="add btn">+</div>
+                    <div class="rem btn">−</div>
+                    <div class="reset btn">↺</div>
+                </div>
+            </div>
+
+            <div class="shell blank">
+                <div class="label">blank shells</div>
+                <div class="calc">
+                    <div class="count">?</div>
+                    <div class="add btn">+</div>
+                    <div class="rem btn">−</div>
+                    <div class="reset btn">↺</div>
+                </div>
+            </div>
+
+            <div class="chance">
+                <div class="label">current shell</div>
+                <div class="value">
+                    <div>
+                        <small class="label">live</small><br>
+                        <span class="islive_chance">?</span>%
+                    </div>
+                    <div>
+                        <small class="label">blank</small><br>
+                        <span class="isblank_chance">?</span>%
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="godown">
+            ?&darr;?&darr;?&darr;?
+        </div>
+
+
+        <div class="footer">
+            <p>
+                <strong>br-shelltracker</strong><br>
+                A helper tool for the game <a href="https://criticalreflex.io/buckshot_roulette" target="_blank">Buckshot Roulette</a>.
+            </p>
+            <p>
+                Too baked to remember how many live and blank shells there are left?
+                Just click <strong>+</strong> or <strong>−</strong> to update the displayed counts and chances whenever the shotgun is reloaded, a shell is used, ejected, or its polarity is flipped.
+            </p>
+            <p>
+                <a href="https://github.com/etrusci-org/br-shelltracker" target="_blank">GitHub</a> &middot;
+                <a href="https://etrusci.org" target="_blank">etrusci.org</a>
+            </p>
+        </div>
+
+    </div>
+
+
+    <script src="./br-shelltracker.js"></script>
+</body>
+</html>

@@ -3,8 +3,8 @@
 csso \
     --watch \
     --comments exclamation \
-    --input ./src/brhelper.css \
+    --input ./src/br-shelltracker.css \
     --input-source-map none \
-    --output ./dist/brhelper.css \
+    --output ./dist/br-shelltracker.css \
     --source-map none \
     --stat
