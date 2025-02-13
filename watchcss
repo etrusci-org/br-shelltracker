@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+csso \
+    --watch \
+    --comments exclamation \
+    --input ./src/brhelper.css \
+    --input-source-map none \
+    --output ./dist/brhelper.css \
+    --source-map none \
+    --stat
