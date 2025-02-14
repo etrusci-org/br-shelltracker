@@ -70,7 +70,6 @@ p {
 
         .shell,
         .chance {
-            /* text-align: center; */
             padding: 5px;
             margin-bottom: 10px;
             border-width: 3px;
@@ -105,12 +104,10 @@ p {
 
 
     .godown {
-        /* text-align: center; */
         margin-bottom: 50vh;
     }
 
     .footer {
-        /* text-align: center; */
         margin-bottom: 50vh;
     }
 
@@ -162,7 +159,6 @@ body, a {
     color: var(--text-color-secondary);
 }
 
-.btn:hover,
-.btn:focus {
+.btn:hover {
     color: var(--text-color-main);
 }
