@@ -23,9 +23,16 @@
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-html, body,
-div, h1, p,
-span, small, a {
+html,
+body,
+div,
+h1,
+p,
+details,
+summary,
+span,
+small,
+a {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -45,7 +52,6 @@ body {
 h1 {
     font-size: inherit;
     letter-spacing: 4px;
-    margin-bottom: 50px;
 }
 
 a {
@@ -60,7 +66,7 @@ p {
     width: 100%;
     min-width: 370px;
     max-width: 500px;
-    padding: 20px;
+    padding: 130px 20px 50vh 20px;
     margin: 0 auto;
 }
 
@@ -107,19 +113,20 @@ p {
         margin-bottom: 50vh;
     }
 
-    .footer {
-        margin-bottom: 50vh;
-    }
-
 
 .label {
     font-family: var(--font-family-serif);
     letter-spacing: 2px;
 }
 
-.btn {
+.btn,
+.toggle {
     cursor: pointer;
     user-select: none;
+}
+
+.hidden {
+    display: none;
 }
 
 

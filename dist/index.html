@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>br-shelltracker</title>
+    <link rel="stylesheet" href="./br-shelltracker.css?cb=h">
 
-    <style>.hidden { display: none; }</style>
+    <title>br-shelltracker</title>
 </head>
 <body>
     <noscript>PLEASE ENABLE JAVASCRIPT IN YOUR WEBBROWSER OR THIS TOOL WON'T WORK.</noscript>
 
     <div class="app hidden">
-        <h1>br-shelltracker</h1>
 
         <div class="shelltracker">
 
@@ -38,16 +37,17 @@
 
             <div class="chance">
                 <div class="label">current shell</div>
-                <div class="value">
+                <div class="value hidden">
                     <div>
                         <small class="label">live</small><br>
-                        <span class="islive_chance">?</span>%
+                        <span class="islive_chance">?</span>
                     </div>
                     <div>
                         <small class="label">blank</small><br>
-                        <span class="isblank_chance">?</span>%
+                        <span class="isblank_chance">?</span>
                     </div>
                 </div>
+                <span class="toggle btn">trust your gut</span>
             </div>
 
         </div>
@@ -59,8 +59,8 @@
 
 
         <div class="footer">
+            <h1>br-shelltracker</h1>
             <p>
-                <strong>br-shelltracker</strong><br>
                 A helper tool for the game <a href="https://criticalreflex.io/buckshot_roulette" target="_blank">Buckshot Roulette</a>.
             </p>
             <p>
@@ -76,6 +76,6 @@
     </div>
 
 
-    <script src="./br-shelltracker.js"></script>
+    <script src="./br-shelltracker.js?cb=h"></script>
 </body>
 </html>

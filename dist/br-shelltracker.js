@@ -1,6 +1,5 @@
 "use strict";
 class BRShellTracker {
-    static v = 7;
     #state;
     #ui;
     constructor() {
@@ -10,6 +9,7 @@ class BRShellTracker {
             total_count: 0,
             islive_chance: 0,
             isblank_chance: 0,
+            hide_chance: false,
         };
         this.#ui = {
             app: document.querySelector('.app'),
@@ -17,6 +17,8 @@ class BRShellTracker {
             blank_count: document.querySelector('.shell.blank .count'),
             islive_chance: document.querySelector('.islive_chance'),
             isblank_chance: document.querySelector('.isblank_chance'),
+            chance_value: document.querySelector('.chance .value'),
+            chance_toggle: document.querySelector('.chance .toggle'),
             add_live: document.querySelector('.shell.live .add'),
             rem_live: document.querySelector('.shell.live .rem'),
             reset_live: document.querySelector('.shell.live .reset'),
@@ -24,22 +26,26 @@ class BRShellTracker {
             rem_blank: document.querySelector('.shell.blank .rem'),
             reset_blank: document.querySelector('.shell.blank .reset'),
         };
-        this.#ui.add_live.addEventListener('click', () => this.#recount('live', 'add'));
-        this.#ui.rem_live.addEventListener('click', () => this.#recount('live', 'rem'));
-        this.#ui.reset_live.addEventListener('click', () => this.#recount('live', 'reset'));
-        this.#ui.add_blank.addEventListener('click', () => this.#recount('blank', 'add'));
-        this.#ui.rem_blank.addEventListener('click', () => this.#recount('blank', 'rem'));
-        this.#ui.reset_blank.addEventListener('click', () => this.#recount('blank', 'reset'));
+        this.#ui.add_live.addEventListener('click', (e) => this.#recount(e, 'live', 'add'));
+        this.#ui.rem_live.addEventListener('click', (e) => this.#recount(e, 'live', 'rem'));
+        this.#ui.reset_live.addEventListener('click', (e) => this.#recount(e, 'live', 'reset'));
+        this.#ui.add_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'add'));
+        this.#ui.rem_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'rem'));
+        this.#ui.reset_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'reset'));
+        this.#ui.chance_toggle.addEventListener('click', (e) => this.#toggle_chance(e));
         this.#ui.app.classList.remove('hidden');
         this.#update_ui();
     }
     #update_ui() {
         this.#ui.live_count.textContent = String(this.#state.live_count);
         this.#ui.blank_count.textContent = String(this.#state.blank_count);
-        this.#ui.islive_chance.textContent = String(this.#state.islive_chance.toFixed(2));
-        this.#ui.isblank_chance.textContent = String(this.#state.isblank_chance.toFixed(2));
+        if (!this.#state.hide_chance) {
+            this.#ui.islive_chance.textContent = String(this.#state.islive_chance.toFixed(2)) + '%';
+            this.#ui.isblank_chance.textContent = String(this.#state.isblank_chance.toFixed(2)) + '%';
+        }
     }
-    #recount(shell_type, operation) {
+    #recount(event, shell_type, operation) {
+        event.preventDefault();
         if (operation == 'add') {
             this.#state[`${shell_type}_count`] += 1;
             this.#state.total_count += 1;
@@ -65,11 +71,20 @@ class BRShellTracker {
         }
         this.#update_ui();
     }
+    #toggle_chance(event) {
+        event.preventDefault();
+        this.#state.hide_chance = (this.#state.hide_chance) ? false : true;
+        if (!this.#state.hide_chance) {
+            this.#ui.chance_toggle.textContent = 'trust your gut';
+        }
+        else {
+            this.#ui.chance_toggle.textContent = 'trust the numbers';
+            this.#ui.islive_chance.textContent = '-';
+            this.#ui.isblank_chance.textContent = '-';
+        }
+        this.#update_ui();
+    }
 }
 window.addEventListener('load', () => {
-    const s = document.createElement('link');
-    s.setAttribute('rel', 'stylesheet');
-    s.setAttribute('href', `./br-shelltracker.css?v=${BRShellTracker.v}`);
-    document.head.append(s);
     new BRShellTracker();
 });
