@@ -4,48 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>br-shelltracker</title>
+    <link rel="stylesheet" href="./br-shelltracker.css?cb=i">
 
-    <style>.hidden { display: none; }</style>
+    <title>br-shelltracker</title>
 </head>
 <body>
     <noscript>PLEASE ENABLE JAVASCRIPT IN YOUR WEBBROWSER OR THIS TOOL WON'T WORK.</noscript>
 
     <div class="app hidden">
-        <h1>br-shelltracker</h1>
 
         <div class="shelltracker">
 
             <div class="shell live">
                 <div class="label">live shells</div>
-                <div class="calc">
+                <div class="calc grid">
                     <div class="count">?</div>
-                    <div class="add btn">+</div>
-                    <div class="rem btn">−</div>
-                    <div class="reset btn">↺</div>
+                    <div class="add ico"></div>
+                    <div class="rem ico"></div>
+                    <div class="reset ico"></div>
                 </div>
             </div>
 
             <div class="shell blank">
                 <div class="label">blank shells</div>
-                <div class="calc">
+                <div class="calc grid">
                     <div class="count">?</div>
-                    <div class="add btn">+</div>
-                    <div class="rem btn">−</div>
-                    <div class="reset btn">↺</div>
+                    <div class="add ico"></div>
+                    <div class="rem ico"></div>
+                    <div class="reset ico"></div>
                 </div>
             </div>
 
             <div class="chance">
                 <div class="label">current shell</div>
-                <div class="value">
+                <div class="value grid">
                     <div>
                         <small class="label">live</small><br>
-                        <span class="islive_chance">?</span>%
+                        <span class="islive_chance">?</span>
+                    </div>
+                    <div>
+                        <span class="toggle ico on"></span>
                     </div>
                     <div>
                         <small class="label">blank</small><br>
-                        <span class="isblank_chance">?</span>%
+                        <span class="isblank_chance">?</span>
                     </div>
                 </div>
             </div>
@@ -58,14 +60,14 @@
         </div>
 
 
-        <div class="footer">
+        <div>
+            <h1>br-shelltracker</h1>
             <p>
-                <strong>br-shelltracker</strong><br>
                 A helper tool for the game <a href="https://criticalreflex.io/buckshot_roulette" target="_blank">Buckshot Roulette</a>.
             </p>
             <p>
                 Too baked to remember how many live and blank shells there are left?
-                Just click <strong>+</strong> or <strong>−</strong> to update the displayed counts and chances whenever the shotgun is reloaded, a shell is used, ejected, or its polarity is flipped.
+                Just update the live and blank shell counts whenever the shotgun is reloaded, a shell is used, ejected, or its polarity is flipped.
             </p>
             <p>
                 <a href="https://github.com/etrusci-org/br-shelltracker" target="_blank">GitHub</a> &middot;
@@ -76,6 +78,7 @@
     </div>
 
 
-    <script src="./br-shelltracker.js"></script>
+    <script src="./br-shelltracker.js?cb=i"></script>
+    <script>window.addEventListener('load', () => new BRShellTracker())</script>
 </body>
 </html>

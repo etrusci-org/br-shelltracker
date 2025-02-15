@@ -1,9 +1,14 @@
+/*
+br-shelltracker <https://github.com/etrusci-org/br-shelltracker>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 type BRShellTrackerState = {
     live_count: number
     blank_count: number
     total_count: number
     islive_chance: number
     isblank_chance: number
+    hide_chance: boolean
 }
 
 
@@ -13,6 +18,8 @@ type BRShellTrackerUI = {
     blank_count: HTMLElement
     islive_chance: HTMLElement
     isblank_chance: HTMLElement
+    chance_value: HTMLElement
+    chance_toggle: HTMLElement
     add_live: HTMLElement
     rem_live: HTMLElement
     reset_live: HTMLElement
@@ -22,12 +29,8 @@ type BRShellTrackerUI = {
 }
 
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 class BRShellTracker
 {
-    static v: number = 7
     #state: BRShellTrackerState
     #ui: BRShellTrackerUI
 
@@ -40,6 +43,7 @@ class BRShellTracker
             total_count: 0,
             islive_chance: 0,
             isblank_chance: 0,
+            hide_chance: false,
         }
 
         this.#ui = {
@@ -48,6 +52,8 @@ class BRShellTracker
             blank_count: document.querySelector('.shell.blank .count') as HTMLElement,
             islive_chance: document.querySelector('.islive_chance') as HTMLElement,
             isblank_chance: document.querySelector('.isblank_chance') as HTMLElement,
+            chance_value: document.querySelector('.chance .value') as HTMLElement,
+            chance_toggle: document.querySelector('.chance .toggle') as HTMLElement,
             add_live: document.querySelector('.shell.live .add') as HTMLElement,
             rem_live: document.querySelector('.shell.live .rem') as HTMLElement,
             reset_live: document.querySelector('.shell.live .reset') as HTMLElement,
@@ -56,31 +62,51 @@ class BRShellTracker
             reset_blank: document.querySelector('.shell.blank .reset') as HTMLElement,
         }
 
-        this.#ui.add_live.addEventListener('click', () => this.#recount('live', 'add'))
-        this.#ui.rem_live.addEventListener('click', () => this.#recount('live', 'rem'))
-        this.#ui.reset_live.addEventListener('click', () => this.#recount('live', 'reset'))
-        this.#ui.add_blank.addEventListener('click', () => this.#recount('blank', 'add'))
-        this.#ui.rem_blank.addEventListener('click', () => this.#recount('blank', 'rem'))
-        this.#ui.reset_blank.addEventListener('click', () => this.#recount('blank', 'reset'))
+        this.#ui.add_live.addEventListener('click', (e) => this.#recount(e, 'live', 'add'))
+        this.#ui.rem_live.addEventListener('click', (e) => this.#recount(e, 'live', 'rem'))
+        this.#ui.reset_live.addEventListener('click', (e) => this.#recount(e, 'live', 'reset'))
+        this.#ui.add_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'add'))
+        this.#ui.rem_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'rem'))
+        this.#ui.reset_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'reset'))
+        this.#ui.chance_toggle.addEventListener('click', (e) => this.#toggle_chance(e))
 
-        this.#ui.app.classList.remove('hidden')
-
-        this.#update_ui()
+        this.#update_ui(true)
     }
 
 
-    #update_ui(): void
+    #update_ui(on_init: boolean = false, on_chance_toggle: boolean = false): void
     {
-        this.#ui.live_count.textContent = String(this.#state.live_count)
-        this.#ui.blank_count.textContent = String(this.#state.blank_count)
-        this.#ui.islive_chance.textContent = String(this.#state.islive_chance.toFixed(2))
-        this.#ui.isblank_chance.textContent = String(this.#state.isblank_chance.toFixed(2))
+        if (on_init) {
+            this.#ui.app.classList.remove('hidden')
+        }
+
+        if (on_chance_toggle) {
+            this.#ui.chance_toggle.classList.toggle('on')
+
+            if (this.#state.hide_chance) {
+                this.#ui.islive_chance.textContent = '~'
+                this.#ui.isblank_chance.textContent = '~'
+            }
+        }
+
+        this.#ui.live_count.textContent = `${this.#state.live_count}`
+        this.#ui.blank_count.textContent = `${this.#state.blank_count}`
+
+        if (!this.#state.hide_chance) {
+            this.#ui.islive_chance.textContent = `${this.#state.islive_chance.toFixed(2)}%`
+            this.#ui.isblank_chance.textContent = `${this.#state.isblank_chance.toFixed(2)}%`
+        }
     }
 
 
-    #recount(shell_type: 'live' | 'blank', operation: 'add' | 'rem' | 'reset'): void
+    #recount(event: MouseEvent, shell_type: 'live' | 'blank', operation: 'add' | 'rem' | 'reset'): void
     {
+        event.preventDefault()
+
         if (operation == 'add') {
+            if (this.#state[`${shell_type}_count`] >= 8) {
+                return
+            }
             this.#state[`${shell_type}_count`] += 1
             this.#state.total_count += 1
         }
@@ -109,17 +135,14 @@ class BRShellTracker
 
         this.#update_ui()
     }
+
+
+    #toggle_chance(event: MouseEvent): void
+    {
+        event.preventDefault()
+
+        this.#state.hide_chance = (this.#state.hide_chance) ? false : true
+
+        this.#update_ui(false, true)
+    }
 }
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-window.addEventListener('load', () => {
-    const s = document.createElement('link')
-    s.setAttribute('rel', 'stylesheet')
-    s.setAttribute('href', `./br-shelltracker.css?v=${BRShellTracker.v}`)
-    document.head.append(s)
-
-    new BRShellTracker()
-})
