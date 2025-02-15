@@ -1,4 +1,7 @@
 "use strict";
+/*
+br-shelltracker <https://github.com/etrusci-org/br-shelltracker>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 class BRShellTracker {
     #state;
     #ui;
@@ -33,15 +36,24 @@ class BRShellTracker {
         this.#ui.rem_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'rem'));
         this.#ui.reset_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'reset'));
         this.#ui.chance_toggle.addEventListener('click', (e) => this.#toggle_chance(e));
-        this.#ui.app.classList.remove('hidden');
-        this.#update_ui();
+        this.#update_ui(true);
     }
-    #update_ui() {
-        this.#ui.live_count.textContent = String(this.#state.live_count);
-        this.#ui.blank_count.textContent = String(this.#state.blank_count);
+    #update_ui(on_init = false, on_chance_toggle = false) {
+        if (on_init) {
+            this.#ui.app.classList.remove('hidden');
+        }
+        if (on_chance_toggle) {
+            this.#ui.chance_toggle.classList.toggle('on');
+            if (this.#state.hide_chance) {
+                this.#ui.islive_chance.textContent = '~';
+                this.#ui.isblank_chance.textContent = '~';
+            }
+        }
+        this.#ui.live_count.textContent = `${this.#state.live_count}`;
+        this.#ui.blank_count.textContent = `${this.#state.blank_count}`;
         if (!this.#state.hide_chance) {
-            this.#ui.islive_chance.textContent = String(this.#state.islive_chance.toFixed(2)) + '%';
-            this.#ui.isblank_chance.textContent = String(this.#state.isblank_chance.toFixed(2)) + '%';
+            this.#ui.islive_chance.textContent = `${this.#state.islive_chance.toFixed(2)}%`;
+            this.#ui.isblank_chance.textContent = `${this.#state.isblank_chance.toFixed(2)}%`;
         }
     }
     #recount(event, shell_type, operation) {
@@ -74,17 +86,6 @@ class BRShellTracker {
     #toggle_chance(event) {
         event.preventDefault();
         this.#state.hide_chance = (this.#state.hide_chance) ? false : true;
-        if (!this.#state.hide_chance) {
-            this.#ui.chance_toggle.textContent = 'trust your gut';
-        }
-        else {
-            this.#ui.chance_toggle.textContent = 'trust the numbers';
-            this.#ui.islive_chance.textContent = '-';
-            this.#ui.isblank_chance.textContent = '-';
-        }
-        this.#update_ui();
+        this.#update_ui(false, true);
     }
 }
-window.addEventListener('load', () => {
-    new BRShellTracker();
-});

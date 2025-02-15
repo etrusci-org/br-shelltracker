@@ -1,3 +1,7 @@
+/*
+br-shelltracker <https://github.com/etrusci-org/br-shelltracker>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
 type BRShellTrackerState = {
     live_count: number
     blank_count: number
@@ -23,9 +27,6 @@ type BRShellTrackerUI = {
     rem_blank: HTMLElement
     reset_blank: HTMLElement
 }
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 class BRShellTracker
@@ -69,20 +70,31 @@ class BRShellTracker
         this.#ui.reset_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'reset'))
         this.#ui.chance_toggle.addEventListener('click', (e) => this.#toggle_chance(e))
 
-        this.#ui.app.classList.remove('hidden')
-
-        this.#update_ui()
+        this.#update_ui(true)
     }
 
 
-    #update_ui(): void
+    #update_ui(on_init: boolean = false, on_chance_toggle: boolean = false): void
     {
-        this.#ui.live_count.textContent = String(this.#state.live_count)
-        this.#ui.blank_count.textContent = String(this.#state.blank_count)
+        if (on_init) {
+            this.#ui.app.classList.remove('hidden')
+        }
+
+        if (on_chance_toggle) {
+            this.#ui.chance_toggle.classList.toggle('on')
+
+            if (this.#state.hide_chance) {
+                this.#ui.islive_chance.textContent = '~'
+                this.#ui.isblank_chance.textContent = '~'
+            }
+        }
+
+        this.#ui.live_count.textContent = `${this.#state.live_count}`
+        this.#ui.blank_count.textContent = `${this.#state.blank_count}`
 
         if (!this.#state.hide_chance) {
-            this.#ui.islive_chance.textContent = String(this.#state.islive_chance.toFixed(2)) + '%'
-            this.#ui.isblank_chance.textContent = String(this.#state.isblank_chance.toFixed(2)) + '%'
+            this.#ui.islive_chance.textContent = `${this.#state.islive_chance.toFixed(2)}%`
+            this.#ui.isblank_chance.textContent = `${this.#state.isblank_chance.toFixed(2)}%`
         }
     }
 
@@ -128,24 +140,6 @@ class BRShellTracker
 
         this.#state.hide_chance = (this.#state.hide_chance) ? false : true
 
-        if (!this.#state.hide_chance) {
-            this.#ui.chance_toggle.textContent = 'trust your gut'
-        }
-        else {
-            this.#ui.chance_toggle.textContent = 'trust the numbers'
-            this.#ui.islive_chance.textContent = '-'
-            this.#ui.isblank_chance.textContent = '-'
-        }
-
-
-        this.#update_ui()
+        this.#update_ui(false, true)
     }
 }
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-window.addEventListener('load', () => {
-    new BRShellTracker()
-})
