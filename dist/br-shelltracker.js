@@ -59,6 +59,9 @@ class BRShellTracker {
     #recount(event, shell_type, operation) {
         event.preventDefault();
         if (operation == 'add') {
+            if (this.#state[`${shell_type}_count`] >= 8) {
+                return;
+            }
             this.#state[`${shell_type}_count`] += 1;
             this.#state.total_count += 1;
         }
