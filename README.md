@@ -1,8 +1,7 @@
 # br-shelltracker
 
-A helper tool for the game [Buckshot Roulette](https://criticalreflex.io/buckshot_roulette).
-
-Too baked to remember how many live and blank shells there are left? Just update the live and blank shell counts whenever the shotgun is reloaded, a shell is used, ejected, or its polarity is flipped.
+A helper tool for the game [Buckshot Roulette](https://criticalreflex.io/buckshot_roulette).  
+Too baked to remember how many live and blank shells there are left? Just click `+` or `−` whenever the shotgun is reloaded, a shell is used, ejected, or its polarity is flipped.
 
 
 
