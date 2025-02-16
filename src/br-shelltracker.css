@@ -219,6 +219,6 @@ body, a {
     opacity: .5;
 }
 
-.ico:hover {
+.ico:active {
     opacity: 1;
 }
