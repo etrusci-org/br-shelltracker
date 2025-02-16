@@ -62,13 +62,13 @@ class BRShellTracker
             reset_blank: document.querySelector('.shell.blank .reset') as HTMLElement,
         }
 
-        this.#ui.add_live.addEventListener('click', (e) => this.#recount(e, 'live', 'add'))
-        this.#ui.rem_live.addEventListener('click', (e) => this.#recount(e, 'live', 'rem'))
-        this.#ui.reset_live.addEventListener('click', (e) => this.#recount(e, 'live', 'reset'))
-        this.#ui.add_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'add'))
-        this.#ui.rem_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'rem'))
-        this.#ui.reset_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'reset'))
-        this.#ui.chance_toggle.addEventListener('click', (e) => this.#toggle_chance(e))
+        this.#ui.add_live.addEventListener('click', () => this.#recount('live', 'add'))
+        this.#ui.rem_live.addEventListener('click', () => this.#recount('live', 'rem'))
+        this.#ui.reset_live.addEventListener('click', () => this.#recount('live', 'reset'))
+        this.#ui.add_blank.addEventListener('click', () => this.#recount('blank', 'add'))
+        this.#ui.rem_blank.addEventListener('click', () => this.#recount('blank', 'rem'))
+        this.#ui.reset_blank.addEventListener('click', () => this.#recount('blank', 'reset'))
+        this.#ui.chance_toggle.addEventListener('click', () => this.#toggle_chance())
 
         this.#update_ui(true)
     }
@@ -99,10 +99,8 @@ class BRShellTracker
     }
 
 
-    #recount(event: MouseEvent, shell_type: 'live' | 'blank', operation: 'add' | 'rem' | 'reset'): void
+    #recount(shell_type: 'live' | 'blank', operation: 'add' | 'rem' | 'reset'): void
     {
-        event.preventDefault()
-
         if (operation == 'add') {
             if (this.#state[`${shell_type}_count`] >= 8) {
                 return
@@ -137,10 +135,8 @@ class BRShellTracker
     }
 
 
-    #toggle_chance(event: MouseEvent): void
+    #toggle_chance(): void
     {
-        event.preventDefault()
-
         this.#state.hide_chance = (this.#state.hide_chance) ? false : true
 
         this.#update_ui(false, true)
