@@ -29,13 +29,13 @@ class BRShellTracker {
             rem_blank: document.querySelector('.shell.blank .rem'),
             reset_blank: document.querySelector('.shell.blank .reset'),
         };
-        this.#ui.add_live.addEventListener('click', (e) => this.#recount(e, 'live', 'add'));
-        this.#ui.rem_live.addEventListener('click', (e) => this.#recount(e, 'live', 'rem'));
-        this.#ui.reset_live.addEventListener('click', (e) => this.#recount(e, 'live', 'reset'));
-        this.#ui.add_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'add'));
-        this.#ui.rem_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'rem'));
-        this.#ui.reset_blank.addEventListener('click', (e) => this.#recount(e, 'blank', 'reset'));
-        this.#ui.chance_toggle.addEventListener('click', (e) => this.#toggle_chance(e));
+        this.#ui.add_live.addEventListener('click', () => this.#recount('live', 'add'));
+        this.#ui.rem_live.addEventListener('click', () => this.#recount('live', 'rem'));
+        this.#ui.reset_live.addEventListener('click', () => this.#recount('live', 'reset'));
+        this.#ui.add_blank.addEventListener('click', () => this.#recount('blank', 'add'));
+        this.#ui.rem_blank.addEventListener('click', () => this.#recount('blank', 'rem'));
+        this.#ui.reset_blank.addEventListener('click', () => this.#recount('blank', 'reset'));
+        this.#ui.chance_toggle.addEventListener('click', () => this.#toggle_chance());
         this.#update_ui(true);
     }
     #update_ui(on_init = false, on_chance_toggle = false) {
@@ -56,8 +56,7 @@ class BRShellTracker {
             this.#ui.isblank_chance.textContent = `${this.#state.isblank_chance.toFixed(2)}%`;
         }
     }
-    #recount(event, shell_type, operation) {
-        event.preventDefault();
+    #recount(shell_type, operation) {
         if (operation == 'add') {
             if (this.#state[`${shell_type}_count`] >= 8) {
                 return;
@@ -86,8 +85,7 @@ class BRShellTracker {
         }
         this.#update_ui();
     }
-    #toggle_chance(event) {
-        event.preventDefault();
+    #toggle_chance() {
         this.#state.hide_chance = (this.#state.hide_chance) ? false : true;
         this.#update_ui(false, true);
     }
